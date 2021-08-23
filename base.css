@@ -1,0 +1,15 @@
+.wrong {
+  color: red;
+}
+
+.correct {
+  color: green;
+}
+
+.hide {
+  display: None;
+}
+
+.show {
+  display: show;
+}
