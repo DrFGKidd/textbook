@@ -1,4 +1,8 @@
 <script>
+import Variable from './Variable.vue'
+import Blank from './Blank.vue'
+import Hint from './Hint.vue'
+
 export default {
   data: function () {
     return {
@@ -14,6 +18,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  components: {
+    Blank,
+    Variable,
+    Hint
   },
   created: function () {
     this.$store[this.name]={}
@@ -43,11 +52,6 @@ export default {
       });
       return elements
     }
-  },
-  components: {
-    Blank,
-    Variable,
-    Hint
   },
   render: function(createElement) {
     let elements = this.parseText()
