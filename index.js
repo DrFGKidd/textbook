@@ -3,6 +3,7 @@
 //app.component('problem0', {
 //numbers out of range, what to do if in wrong order?
 //For Vue 2
+import { Vue } from 'vue'
 import { App } from './App'
 
 const store = Vue.observable({
