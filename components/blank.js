@@ -17,7 +17,6 @@ var Blank = Variable.extend({
       this.str[this.name+"_key"]=this.answer/this.conversion
       return this.str[this.name+"_key"]
     },
-    suffix: function() {return "\\(" + this.unit + "\\)"},
   },
   methods: {
     correct: function() {

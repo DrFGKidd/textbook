@@ -4,6 +4,8 @@ function dLS(url) {
 
     document.body.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 } // dLS = dynamically Load script
+dLS("./mixins/uses-units.js")
+dLS("./mixins/uses-numbers.js")
 dLS("./problems.js")
 dLS("./components/variable.js")
 dLS("./components/blank.js")
