@@ -24,16 +24,12 @@
 <body>
   <div id="app">
     <v-app>
-      <problem name="problem1" text="A boy weighs <variable units=N,lb_f max=300 min=100 name=weight/>. If a force of
-      <variable units=N,lb_f max=600 min=300 name=force/> is applied, what is the boy's acceleration?
-      <blank units=m/s^2,ft/s^2 tol=.01 name=acceleration expression=force/(weight/9.81) />" />
+      <problem-set problemkey="trial" />
     </v-app>
   </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/gh/DrFGKidd/textbook@SchoolBranch/index.js"></script>-->
-<script src="./index.js"></script>
+<script src="./resources.js?v=1"></script>
 
 </html>
