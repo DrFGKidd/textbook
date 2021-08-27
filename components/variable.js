@@ -2,7 +2,7 @@ var Variable = Vue.extend({
   props: {
     name: {type: String},
   },
-  mixins: [usesNumbers,usesUnits],
+  mixins: [varUsesNumbers,usesUnits],
   data: function () {
     return {
       str: this.$store[this.$parent.name]

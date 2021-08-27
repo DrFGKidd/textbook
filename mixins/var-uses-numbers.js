@@ -1,4 +1,4 @@
-var usesNumbers = {
+var varUsesNumbers = {
   props: {
     max: [Number, String],
     min: [Number, String],

@@ -15,9 +15,9 @@ Also, what is the car's mass? <blank units=kg tol=.01 name=mass expression=weigh
 `
 problems.push(text)
 
-text = `A man on an electric skateboard is accelerating at <variable units=m/s^2,ft/s^2 max=3.81 min=0.95 name=acceleration/>.
+text = `<blank units=N,lb_f tol=.01 name=force expression=mass*acceleration/>A man on an electric skateboard is accelerating at <variable units=m/s^2,ft/s^2 max=3.81 min=0.95 name=acceleration/>.
 If the man has a mass of <variable units=kg max=95 min=50 name=mass/>, what is the force the skateboard is applying?
-<blank units=N,lb_f tol=.01 name=force expression=mass*acceleration/>`
+`
 
 problems.push(text)
 
