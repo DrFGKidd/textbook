@@ -44,7 +44,8 @@ var Problem = Vue.extend({
   components: {
     Blank,
     Variable,
-    Hint
+    Hint,
+    Word
   },
   render: function(createElement) {
     let elements = this.parseText()

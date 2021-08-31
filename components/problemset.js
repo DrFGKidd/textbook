@@ -25,7 +25,6 @@ var ProblemSet = Vue.extend({
         probs = this.shuffle(probs)
       }
       if (!isNaN(this.number)) {
-        console.log(probs.length)
         let num = Math.min(this.number,probs.length)
         probs = probs.slice(0,num)
       }
