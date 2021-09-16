@@ -52,15 +52,13 @@ var blankUsesUnits = {
         let min = val*(1-this.tol)
         let max = val*(1+this.tol)
         if (this.final_answer>min && this.final_answer<max) {
-          this.modifier = 0.75
-          return this.error_message(set)
+          return [this.error_message(set), 0.5]
         } else if ((this.answer>min && this.answer<max) && this.conversion!=1) {
-          this.modifier = 0.9
           set.push(this.name)
-          return this.error_message(set)
+          return [this.error_message(set), 0.75]
         }
       }
-      return true
+      return [true, 1]
 
     },
   }
