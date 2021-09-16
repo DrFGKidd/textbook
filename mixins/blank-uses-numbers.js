@@ -3,6 +3,7 @@ var blankUsesNumbers  = {
   data: function () {
     return {
       str: this.$store[this.$parent.name],
+      modifier: 0,
     }
   },
   mounted: function() {
@@ -21,10 +22,18 @@ var blankUsesNumbers  = {
     },
     number_errors: function(value) {
       let cval = this.final_answer
-      if (this.correct().includes("Correct!")) {return true}
+      if (this.correct().includes("Correct!")) {
+        this.modifier = 1
+        return true
+      }
       else if (value=="") {return "Required"}
-      else if ((cval<this.min && cval>this.min*.9) || (cval>this.max && cval<this.max*1.1)) {return "Close!"}
-      else if (cval<this.min || cval>this.max) {return "Incorrect"}
+      else if ((cval<this.min && cval>this.min*.9) || (cval>this.max && cval<this.max*1.1)) {
+        this.modifier = 0.5
+        return "Close!"
+      }
+      else if (cval<this.min || cval>this.max) {
+        this.modifier = 0
+        return "Incorrect"}
       else {return true}
     },
     new_exp: function() {

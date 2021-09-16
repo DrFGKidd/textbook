@@ -15,7 +15,7 @@ var Problem = Vue.extend({
     },
   },
   created: function () {
-    this.$store[this.name]={}
+    this.$store[this.name]={score:0, blanks:0, max_score:0}
   },
   methods: {
     parseItem: function(text) {

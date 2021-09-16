@@ -15,7 +15,8 @@ var ProblemSet = Vue.extend({
   },
   data: function () {
     return {
-      all_problems: this.$store.problemsets[this.problemkey]
+      all_problems: this.$store.problemsets[this.problemkey],
+      score: 0
     }
   },
   computed: {
@@ -29,9 +30,20 @@ var ProblemSet = Vue.extend({
         probs = probs.slice(0,num)
       }
       return probs
-    }
+    },
   },
   methods: {
+    getScore: function() {
+      let scr = 0
+      test=this.$store
+      try {
+        for (index in this.problems) {
+          scr+=this.$store[index]["score"]
+        }
+      } catch { scr = 0 }
+      this.score=scr
+      return scr
+    },
     shuffle: function(array) {
       let currentIndex = array.length, randomIndex;
       while (currentIndex != 0) {
@@ -47,7 +59,8 @@ var ProblemSet = Vue.extend({
     Problem
   },
   template: `
-  <div>
+  <div v-on:click=getScore()>
+  <div> {{score}} </div>
     <div v-for="(problem,index) in problems">
       <problem :text= 'problem' :name = 'index'/>
     </div>
