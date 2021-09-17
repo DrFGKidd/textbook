@@ -18,7 +18,8 @@ var app = new Vue({
     Blank,
     Hint,
     Problem,
-    ProblemSet
+    ProblemSet,
+    Quiz
   }
 })
 //Vue 3

@@ -35,7 +35,6 @@ var ProblemSet = Vue.extend({
   methods: {
     update: function(points) {
       this.score+=points
-      console.log("I'm in a problemset")
       this.$emit('update',this.score)
     },
     shuffle: function(array) {

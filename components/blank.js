@@ -58,7 +58,7 @@ var Blank = Vue.extend({
       validate-on-blur>
       <template v-slot:label>
         {{capitalize(name)}}
-        <v-progress-circular :value='last_score*100' :size="15" :width="1"/>
+        <v-progress-circular v-if="answer!=''" :value='last_score*100' :size="15" :width="3"/>
       </template>
     </v-text-field>
   `

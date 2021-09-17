@@ -17,7 +17,7 @@ var Problem = Vue.extend({
     },
   },
   created: function () {
-    this.$store[this.name]={score:0, blanks:0, max_score:0}
+    this.$store[this.name]={blanks:0, max_score:0}
   },
   methods: {
     parseItem: function(text) {
@@ -44,7 +44,6 @@ var Problem = Vue.extend({
     },
     update: function(points) {
       this.score += points
-      console.log("I'm in a problem")
       this.$emit('update',this.score-this.last_score)
       this.last_score = this.score
     },
