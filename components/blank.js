@@ -16,7 +16,7 @@ var Blank = Vue.extend({
       answer: "",
       error_functions: [],
       last_score: 0,
-      full_score: 1,
+      full_score: 1+this.penalty,
       modifier: 0,
       success_message: []
     }
@@ -28,8 +28,9 @@ var Blank = Vue.extend({
         if (this.full_score-this.penalty>0) {
           this.full_score -= this.penalty
         } else (this.full_score = 0)
-      }
-      this.str["score"]-=this.last_score-(this.full_score*this.modifier)
+      } else if (this.correct() && this.full_score>1) {this.full_score=1}
+      this.errors(this.answer)
+      this.$emit('update',-this.last_score+this.full_score*this.modifier)
       this.last_score = this.full_score*this.modifier
     },
     capitalize: function(str) {
@@ -49,15 +50,15 @@ var Blank = Vue.extend({
   },
   template: `
     <v-text-field dense class='d-inline-block'
-      v-on:blur='updateScore()'
       v-model=answer
       :success-messages='success_message'
       :suffix='suffix'
       :rules='[errors]'
+      v-on:blur='updateScore()'
       validate-on-blur>
       <template v-slot:label>
         {{capitalize(name)}}
-        <v-progress-circular v-if="answer!=''" :value='last_score*100' :size="15" :width="1"/>
+        <v-progress-circular :value='last_score*100' :size="15" :width="1"/>
       </template>
     </v-text-field>
   `
