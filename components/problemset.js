@@ -15,7 +15,8 @@ var ProblemSet = Vue.extend({
   },
   data: function () {
     return {
-      all_problems: this.$store.problemsets[this.problemkey]
+      all_problems: this.$store.problemsets[this.problemkey],
+      score: 0,
     }
   },
   computed: {
@@ -29,9 +30,13 @@ var ProblemSet = Vue.extend({
         probs = probs.slice(0,num)
       }
       return probs
-    }
+    },
   },
   methods: {
+    update: function(points) {
+      this.score+=points
+      this.$emit('update',this.score)
+    },
     shuffle: function(array) {
       let currentIndex = array.length, randomIndex;
       while (currentIndex != 0) {
@@ -44,12 +49,13 @@ var ProblemSet = Vue.extend({
     }
   },
   components: {
-    Problem
+    Problem,
   },
   template: `
   <div>
+  <div> {{score}} </div>
     <div v-for="(problem,index) in problems">
-      <problem :text= 'problem' :name = 'index'/>
+      <problem v-on:update='update($event)' :text= 'problem' :name = 'index'/>
     </div>
   </div> `
 })

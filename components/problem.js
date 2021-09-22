@@ -2,6 +2,8 @@ var Problem = Vue.extend({
   data: function () {
     return {
   			hint_counter:0,
+        score:0,
+        last_score:0,
     }
   },
   props: {
@@ -15,7 +17,7 @@ var Problem = Vue.extend({
     },
   },
   created: function () {
-    this.$store[this.name]={}
+    this.$store[this.name]={blanks:0, max_score:0}
   },
   methods: {
     parseItem: function(text) {
@@ -39,7 +41,12 @@ var Problem = Vue.extend({
         return el != null && el != '';
       });
       return elements
-    }
+    },
+    update: function(points) {
+      this.score += points
+      this.$emit('update',this.score-this.last_score)
+      this.last_score = this.score
+    },
   },
   components: {
     Blank,
@@ -52,6 +59,7 @@ var Problem = Vue.extend({
     for (i in elements) {
       if (elements[i].includes("<")) {
         let items = this.parseItem(elements[i])
+        if (items[0]=="blank") {items[1]['on']={"update":this.update}}
         elements[i]=createElement(items[0],items[1])
       }
     }

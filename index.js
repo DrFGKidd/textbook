@@ -8,7 +8,10 @@
 
 
 
-
+function updateText() {
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+}
+Vue.prototype.$updateText=updateText
 //Vue 2
 var app = new Vue({
   el:"#app",
@@ -18,8 +21,10 @@ var app = new Vue({
     Blank,
     Hint,
     Problem,
-    ProblemSet
-  }
+    ProblemSet,
+    Quiz
+  },
+
 })
 //Vue 3
 //app.mount("#app")

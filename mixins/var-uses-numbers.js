@@ -4,8 +4,8 @@ var varUsesNumbers = {
     min: [Number, String],
   },
   created: function() {
-    let max = parseInt(this.max,10)
-    let min = parseInt(this.min,10)
+    let max = parseFloat(this.max,10)
+    let min = parseFloat(this.min,10)
     this.str[this.name] = Math.random()*(max-min)+min
   },
   computed: {
