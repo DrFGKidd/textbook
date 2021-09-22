@@ -2,15 +2,17 @@ var Quiz = Vue.extend({
   data: function() {
     return {
       score: 0,
-      drawer: null,
-      overlay: null
+      drawer: false,
+      overlay: null,
+      page: 1,
     }
   },
   props: {
     name: {default: "Quiz"},
     problemsets: {required: true},
     random: {default: false},
-    number: {default: 0}
+    number: {default: 0},
+    max_per_page: {default: 3}
   },
   computed: {
     all_problems: function() {
@@ -39,11 +41,20 @@ var Quiz = Vue.extend({
     code: function() {
         let seed = Math.round(Math.random()*1000).toString()
         return this.encrypt(this.score.toString(),9988)+this.encrypt("random",seed)
+    },
+    pages: function() {
+      return Math.ceil(this.all_problems.length/this.max_per_page)
     }
   },
   methods: {
     update: function(points) {
       this.score+=points
+    },
+    show_page: function(index) {
+      if (!(index<this.page*this.max_per_page && index>=(this.max_per_page*(this.page-1)))) {
+        return "{font-size:100%; visibility:hidden; height:0; width:0; overflow:hidden; position:absolute; right:0; bottom:0}"
+      }
+      return ""
     },
     shuffle: function(array) {
       let currentIndex = array.length, randomIndex;
@@ -69,12 +80,13 @@ var Quiz = Vue.extend({
   },
   components: {
     ProblemSet,
-    Problem
+    Problem,
+    LessonSidebar
   },
   template: `
   <div>
-    <v-navigation-drawer v-model="drawer" app>
-      <!--  -->
+    <v-navigation-drawer width="33%" v-model="drawer" app>
+      <lesson-sidebar name="force"/>
     </v-navigation-drawer>
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
@@ -86,16 +98,17 @@ var Quiz = Vue.extend({
       </v-btn>
     </v-app-bar>
     <v-main>
-    <v-overlay :value="overlay">
-    <div class="text-center">
-      <h3>Your quiz code is <strong>{{code}}</strong></h3>
-    </div><div class="text-center">
-      <v-btn color="red" size="36" @click="overlay=!overlay">Back to Quiz</v-btn>
-    </div>
+      <v-overlay :value="overlay">
+      <div class="text-center">
+        <h3>Your quiz code is <strong>{{code}}</strong></h3>
+        </div><div class="text-center">
+          <v-btn color="red" size="36" @click="overlay=!overlay">Back to Quiz</v-btn>
+        </div>
       </v-overlay>
       <div v-for="(problem, index) in all_problems">
-        <problem v-on:update='update($event)' :text= 'problem' :name = 'index'/>
+          <problem v-bind:style="show_page(index)" v-on:update='update($event)' :text= 'problem' :name = 'index'/>
       </div>
+      <v-pagination v-if="pages>1" v-model="page" :length="pages"></v-pagination>
     </v-main>
   </div>
   `

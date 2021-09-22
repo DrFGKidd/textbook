@@ -13,6 +13,12 @@
         },
         "HTML-CSS": { fonts: ["TeX"] }
       });
+      var repeater;
+      function doWork() {
+         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+         repeater = setTimeout(doWork, 500);
+        }
+      doWork();
     </script>
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -24,7 +30,7 @@
 <body>
   <div id="app">
     <v-app>
-      <quiz name="Acceleration Quiz" :problemsets=[['trial',true,0],['trial',true,0]] />
+      <quiz name="Force Quiz" :problemsets=[['trial',true,0],['trial',true,0]] />
     </v-app>
   </div>
 </body>
