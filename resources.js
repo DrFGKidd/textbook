@@ -21,4 +21,7 @@ dLS("./lessons/lesson-card.js")
 dLS("./lessons/force-lesson.js")
 dLS("./components/lesson-sidebar.js")
 dLS("./components/quiz.js")
-dLS("./index.js")
+setTimeout(function() {
+   dLS("./index.js");
+}, 250);
+
