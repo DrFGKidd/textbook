@@ -85,7 +85,7 @@ var Quiz = Vue.extend({
   },
   template: `
   <div>
-    <v-navigation-drawer width="33%" v-model="drawer" app>
+    <v-navigation-drawer width="500" mobile-breakpoint="1100" v-model="drawer" app>
       <lesson-sidebar name="force"/>
     </v-navigation-drawer>
     <v-app-bar app>
