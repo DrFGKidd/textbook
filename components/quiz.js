@@ -5,6 +5,7 @@ var Quiz = Vue.extend({
       drawer: false,
       overlay: null,
       page: 1,
+      show: true
     }
   },
   props: {
@@ -50,6 +51,11 @@ var Quiz = Vue.extend({
     update: function(points) {
       this.score+=points
     },
+    resetQuiz: function() {
+      this.score = 0
+      this.show = !this.show
+      this.page=1
+    },
     show_page: function(index) {
       if (!(index<this.page*this.max_per_page && index>=(this.max_per_page*(this.page-1)))) {
         return "{font-size:100%; visibility:hidden; height:0; width:0; overflow:hidden; position:absolute; right:0; bottom:0}"
@@ -92,9 +98,15 @@ var Quiz = Vue.extend({
       <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{name}}</v-toolbar-title>
       <v-spacer/>
+
       <span class="text-h6">Current Score  &nbsp; </span>
       <v-btn fab color="indigo" small @click="overlay=!overlay">
         <span class="white--text">{{Math.round(score*30)}}</span>
+      </v-btn>
+      <v-spacer/>
+      <span class="text-h6">Reset Quiz?  &nbsp; </span>
+      <v-btn fab small color="red" @click="resetQuiz">
+        <v-icon color="white">mdi-cached</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -105,7 +117,10 @@ var Quiz = Vue.extend({
           <v-btn color="red" size="36" @click="overlay=!overlay">Back to Quiz</v-btn>
         </div>
       </v-overlay>
-      <div v-for="(problem, index) in all_problems">
+      <div v-if="show" v-for="(problem, index) in all_problems">
+          <problem v-bind:style="show_page(index)" v-on:update='update($event)' :text= 'problem' :name = 'index'/>
+      </div>
+      <div v-if="!show" v-for="(problem, index) in all_problems">
           <problem v-bind:style="show_page(index)" v-on:update='update($event)' :text= 'problem' :name = 'index'/>
       </div>
       <v-pagination v-if="pages>1" v-model="page" :length="pages"></v-pagination>
