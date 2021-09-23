@@ -5,7 +5,8 @@ var Quiz = Vue.extend({
       drawer: false,
       overlay: null,
       page: 1,
-      show: true
+      show: true,
+      all_problems: this.getProblems()
     }
   },
   props: {
@@ -16,7 +17,16 @@ var Quiz = Vue.extend({
     max_per_page: {default: 3}
   },
   computed: {
-    all_problems: function() {
+    code: function() {
+        let seed = Math.round(Math.random()*1000).toString()
+        return this.encrypt(this.score.toString(),9988)+this.encrypt("random",seed)
+    },
+    pages: function() {
+      return Math.ceil(this.all_problems.length/this.max_per_page)
+    }
+  },
+  methods: {
+    getProblems: function() {
       let all_probs = []
       for (i in this.problemsets) {
         let [key, ran, num] = this.problemsets[i]
@@ -39,15 +49,6 @@ var Quiz = Vue.extend({
       }
       return all_probs
     },
-    code: function() {
-        let seed = Math.round(Math.random()*1000).toString()
-        return this.encrypt(this.score.toString(),9988)+this.encrypt("random",seed)
-    },
-    pages: function() {
-      return Math.ceil(this.all_problems.length/this.max_per_page)
-    }
-  },
-  methods: {
     update: function(points) {
       this.score+=points
     },
@@ -55,6 +56,7 @@ var Quiz = Vue.extend({
       this.score = 0
       this.show = !this.show
       this.page=1
+      this.all_problems = this.getProblems()
     },
     show_page: function(index) {
       if (!(index<this.page*this.max_per_page && index>=(this.max_per_page*(this.page-1)))) {
