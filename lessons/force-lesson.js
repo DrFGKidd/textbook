@@ -32,9 +32,14 @@ var ForceLesson = Vue.extend({
         </v-expansion-panel-content>
         </v-expansion-panel>
         <exp-panel header="What is Weight?"
-          body="<p>Weight is just a particular type of force. Weight is the force
-          caused by gravity. The reason astronauts are weightless in space is
-          because there is almost no gravity</p>"/>
+          body="<p>Weight is just a particular type of force. It is the force of the Earth's gravity pulling you towards it.
+          This is why you stay on the planet regardless of whether you are jumping in Australia or the United States.
+          Gravitational force actually happens between everything in the universe and follows the law shown below.
+          \\[F_G=\\frac{G \\cdot m_1 \\cdot m_2}{r^2}\\]Where \\(G\\) is the fancy Gravitational constant, \\(m\\) is the mass of one of two objects, and \\(r\\) is
+          the distance between them. </p><p>Lucky for us and for you, most objects nearby are very small
+          and the massive objects in our universe are all very VERY far away. That means we can simplify that earlier equation
+          and just think about how the Earth pulls on us rather than on how everything pulls on us. This changes the equation
+          to a form you might be familiar with. \\[g=\\frac{G \\cdot m_2}{r^2} \\\\ F_G=W=mg\\]</p>"/>
       </v-expansion-panels>
     </v-row>
 </div>

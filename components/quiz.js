@@ -100,7 +100,6 @@ var Quiz = Vue.extend({
       <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{name}}</v-toolbar-title>
       <v-spacer/>
-
       <span class="text-h6">Current Score  &nbsp; </span>
       <v-btn fab color="indigo" small @click="overlay=!overlay">
         <span class="white--text">{{Math.round(score*30)}}</span>
