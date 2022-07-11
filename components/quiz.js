@@ -101,14 +101,26 @@ var Quiz = Vue.extend({
       <v-toolbar-title>{{name}}</v-toolbar-title>
       <v-spacer/>
       <span class="text-h6">Current Score  &nbsp; </span>
-      <v-btn fab color="indigo" small @click="overlay=!overlay">
-        <span class="white--text">{{Math.round(score*30)}}</span>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" fab color="indigo" small @click="overlay=!overlay">
+            <span class="white--text">{{Math.round(score*30)}}</span>
+          </v-btn>
+        </template>
+        Click the score for your code!
+      </v-tooltip>
+
       <v-spacer/>
       <span class="text-h6">Reset Quiz?  &nbsp; </span>
-      <v-btn fab small color="red" @click="resetQuiz">
-        <v-icon color="white">mdi-cached</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" fab small color="red" @click="resetQuiz">
+            <v-icon color="white">mdi-cached</v-icon>
+          </v-btn>
+        </template>
+        Click to reset score and get new problems!
+      </v-tooltip>
+
     </v-app-bar>
     <v-main>
       <v-overlay :value="overlay">

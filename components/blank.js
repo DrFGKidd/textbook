@@ -60,6 +60,15 @@ var Blank = Vue.extend({
         {{capitalize(name)}}
         <v-progress-circular v-if="answer!=''" :value='last_score*100' :size="15" :width="3"/>
       </template>
+      <template v-slot:append>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-icon v-on="on">
+            mdi-help-circle-outline
+          </v-icon>
+        </template>
+        Click me for help!
+      </v-tooltip>
     </v-text-field>
   `
 
